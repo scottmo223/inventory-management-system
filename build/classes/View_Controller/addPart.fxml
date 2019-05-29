@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="431.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="431.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="View_Controller.AddPartController">
    <children>
       <Button fx:id="saveButton" layoutX="232.0" layoutY="407.0" mnemonicParsing="false" onAction="#saveHandler" prefWidth="70.0" text="Save" />
       <Button fx:id="exit" layoutX="326.0" layoutY="407.0" mnemonicParsing="false" onAction="#exitAddPart" prefWidth="70.0" text="Cancel" />

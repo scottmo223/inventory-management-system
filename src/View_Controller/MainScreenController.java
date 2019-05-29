@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inventorysystemrobertmorales;
+package View_Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -23,11 +24,13 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button partSearch;
     @FXML
+    private TextField partSearchInput;
+    @FXML
     private TableColumn<?, ?> partPartID;
     @FXML
     private TableColumn<?, ?> partPartName;
     @FXML
-    private TableColumn<?, ?> partInventoryLevel;
+    private TableColumn<?, ?> partInventory;
     @FXML
     private TableColumn<?, ?> partPrice;
     @FXML
@@ -39,11 +42,13 @@ public class MainScreenController implements Initializable {
     @FXML
     private Button productSearch;
     @FXML
+    private TextField productSearchInput;
+    @FXML
     private TableColumn<?, ?> productPartID;
     @FXML
     private TableColumn<?, ?> productPartName;
     @FXML
-    private TableColumn<?, ?> productInventoryLevel;
+    private TableColumn<?, ?> productInventory;
     @FXML
     private TableColumn<?, ?> productPrice;
     @FXML
@@ -73,7 +78,6 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void addHandler(ActionEvent event) {
-
     }
 
     @FXML
