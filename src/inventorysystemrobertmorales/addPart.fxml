@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="431.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+   <children>
+      <Button fx:id="saveButton" layoutX="232.0" layoutY="407.0" mnemonicParsing="false" onAction="#saveHandler" prefWidth="70.0" text="Save" />
+      <Button fx:id="exit" layoutX="326.0" layoutY="407.0" mnemonicParsing="false" onAction="#exitAddPart" prefWidth="70.0" text="Cancel" />
+      <Label layoutX="26.0" layoutY="31.0" text="Add Part" textFill="#27218d">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="inhouse" layoutX="130.0" layoutY="31.0" mnemonicParsing="false" text="In-House" />        <!-- FIX ME !!! Needs to display Machine ID-->
+      <RadioButton fx:id="outsourced" layoutX="292.0" layoutY="31.0" mnemonicParsing="false" text="Outsourced" />   <!-- FIX ME !!! Needs to display Company Name-->
+      <TextField fx:id="partID" editable="false" layoutX="174.0" layoutY="96.0" prefHeight="31.0" prefWidth="222.0" text="Auto Gen - Disabled" />
+      <Label layoutX="58.0" layoutY="101.0" text="ID" />
+      <TextField fx:id="partName" layoutX="174.0" layoutY="146.0" prefHeight="31.0" prefWidth="222.0" promptText="Part Name" />
+      <Label layoutX="58.0" layoutY="151.0" text="Name" />
+      <TextField fx:id="partInv" layoutX="174.0" layoutY="196.0" prefHeight="31.0" prefWidth="222.0" promptText="Inventory" />
+      <Label layoutX="58.0" layoutY="201.0" text="Inv" />
+      <TextField fx:id="partCost" layoutX="174.0" layoutY="246.0" prefHeight="31.0" prefWidth="222.0" promptText="Price / Cost" />
+      <Label layoutX="58.0" layoutY="251.0" text="Price/Cost" />
+      <TextField fx:id="partMax" layoutX="174.0" layoutY="296.0" prefHeight="31.0" prefWidth="68.0" promptText="Max" />
+      <Label layoutX="58.0" layoutY="301.0" text="Max" />
+      <TextField fx:id="partCompanyName" layoutX="174.0" layoutY="346.0" prefHeight="31.0" prefWidth="222.0" promptText="Mach ID" />
+      <Label layoutX="58.0" layoutY="351.0" text="Company Name" />
+      <TextField fx:id="partMin" layoutX="327.0" layoutY="296.0" prefHeight="31.0" prefWidth="70.0" promptText="Min" />
+      <Label layoutX="279.0" layoutY="301.0" text="Min" />
+   </children>
+</AnchorPane>
