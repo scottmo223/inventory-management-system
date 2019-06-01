@@ -7,6 +7,7 @@ package View_Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -86,6 +87,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void exitHandler(ActionEvent event) {
+        Platform.exit();
     }
     
 }

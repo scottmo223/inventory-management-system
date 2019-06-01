@@ -19,10 +19,11 @@ public class InventorySystemRobertMorales extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("mainScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View_Controller/mainScreen.fxml"));
         
         Scene scene = new Scene(root);
         
+        stage.setTitle("SMorales Inventory");
         stage.setScene(scene);
         stage.show();
     }
