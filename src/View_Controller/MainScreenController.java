@@ -82,18 +82,47 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void modifyHandler(ActionEvent event) {
+    private void modifyHandler(ActionEvent event) throws IOException {
+        if(event.getSource() == partModify){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyPart.fxml"));
+            Parent mainParent = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modify Part");
+            stage.setScene(new Scene(mainParent));  
+            stage.show();
+        }
+        else if(event.getSource() == productModify){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyProduct.fxml"));
+            Parent mainParent = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modify Product");
+            stage.setScene(new Scene(mainParent));  
+            stage.show();
+        }        
     }
 
     @FXML
     private void addHandler(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addPart.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle("ABC");
-        stage.setScene(new Scene(root1));  
-        stage.show();
+        if(event.getSource() == partAdd){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addPart.fxml"));
+            Parent mainParent = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Add Part");
+            stage.setScene(new Scene(mainParent));  
+            stage.show();
+        }
+        else if(event.getSource() == productAdd){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addProduct.fxml"));
+            Parent mainParent = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Add Product");
+            stage.setScene(new Scene(mainParent));  
+            stage.show();
+        }
     }
 
     @FXML

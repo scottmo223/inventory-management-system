@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author Scott
  */
-public class AddProductController implements Initializable {
+public class ModifyProductController implements Initializable {
 
     @FXML
     private Button partSearch;

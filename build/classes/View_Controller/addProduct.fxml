@@ -12,7 +12,7 @@
    <children>
       <AnchorPane layoutX="9.0" layoutY="19.0" prefHeight="526.0" prefWidth="964.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
-            <Label layoutX="57.0" layoutY="16.0" text="Inventory Management System" textFill="#27218d">
+            <Label layoutX="57.0" layoutY="16.0" text="Add Product" textFill="#27218d">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

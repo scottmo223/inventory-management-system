@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -58,6 +59,8 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     private void exitAddPart(ActionEvent event) {
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
     }
     
 }
