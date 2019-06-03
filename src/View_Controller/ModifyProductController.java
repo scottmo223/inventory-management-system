@@ -76,6 +76,10 @@ public class ModifyProductController implements Initializable {
     }
 
     @FXML
+    private void saveHandler(ActionEvent event) {
+    }
+    
+    @FXML
     private void deleteHandler(ActionEvent event) {
     }
 
