@@ -3,12 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inventorysystemrobertmorales.Model;
+package Model;
 
 /**
  *
  * @author Scott
  */
-public class InhousePart {
+public class InhousePart extends Part{
     
+    private int machineId;
+    
+    public InhousePart(int id, String name, double price, int stock, int min, int max, int machineId) {
+        super(id, name, price, stock, min, max);
+        this.machineId = machineId;
+    }
+    
+    public void setMachineId(int machineId){
+        this.machineId = machineId;
+    }
+        
+    public int getMachineId(){
+        return this.machineId;
+    }
 }
