@@ -20,6 +20,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import Model.Part;
+import Model.Inventory;
+import Model.Product;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -33,13 +38,13 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField partSearchInput;
     @FXML
-    private TableColumn<?, ?> partPartID;
+    private TableColumn<Part, Integer> partPartID;
     @FXML
-    private TableColumn<?, ?> partPartName;
+    private TableColumn<Part, String> partPartName;
     @FXML
-    private TableColumn<?, ?> partInventory;
+    private TableColumn<Part, Integer> partInventory;
     @FXML
-    private TableColumn<?, ?> partPrice;
+    private TableColumn<Part, Double> partPrice;
     @FXML
     private Button partModify;
     @FXML
@@ -51,13 +56,13 @@ public class MainScreenController implements Initializable {
     @FXML
     private TextField productSearchInput;
     @FXML
-    private TableColumn<?, ?> productPartID;
+    private TableColumn<Product, Integer> productPartID;
     @FXML
-    private TableColumn<?, ?> productPartName;
+    private TableColumn<Product, String> productPartName;
     @FXML
-    private TableColumn<?, ?> productInventory;
+    private TableColumn<Product, Integer> productInventory;
     @FXML
-    private TableColumn<?, ?> productPrice;
+    private TableColumn<Product, Double> productPrice;
     @FXML
     private Button productModify;
     @FXML
@@ -66,13 +71,28 @@ public class MainScreenController implements Initializable {
     private Button productDelete;
     @FXML
     private Button exit;
+    @FXML
+    private TableView<Part> partTableView;
+    @FXML
+    private TableView<Product> productTableView;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO (executed as soon as screen loads up)
+        partTableView.setItems(Inventory.getAllParts());
+        partPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+        productTableView.setItems(Inventory.getAllProducts());
+        productPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }    
 
     @FXML
