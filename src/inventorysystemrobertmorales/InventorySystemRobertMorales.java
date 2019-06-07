@@ -55,3 +55,5 @@ public class InventorySystemRobertMorales extends Application {
     }
     
 }
+
+//observable list and table views III ended at 0:17:51

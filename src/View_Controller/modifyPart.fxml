@@ -32,9 +32,14 @@
       <Label layoutX="58.0" layoutY="251.0" text="Price/Cost" />
       <TextField fx:id="partMax" layoutX="174.0" layoutY="296.0" prefHeight="31.0" prefWidth="68.0" promptText="Max" />
       <Label layoutX="58.0" layoutY="301.0" text="Max" />
-      <TextField fx:id="partCompanyName" layoutX="174.0" layoutY="346.0" prefHeight="31.0" prefWidth="222.0" promptText="Mach ID" />
-      <Label layoutX="58.0" layoutY="351.0" text="Company Name" />
-      <TextField fx:id="partMin" layoutX="327.0" layoutY="296.0" prefHeight="31.0" prefWidth="70.0" promptText="Min" />
+       <TextField fx:id="partMin" layoutX="327.0" layoutY="296.0" prefHeight="31.0" prefWidth="70.0" promptText="Min" />
       <Label layoutX="279.0" layoutY="301.0" text="Min" />
+
+      <!--      Co name / Mach ID toggled       -->
+      
+      <TextField fx:id="partCompanyName" disable="true" layoutX="174.0" layoutY="346.0" prefHeight="31.0" prefWidth="222.0" promptText="Company Name" visible="false" />
+      <Label disable="true" layoutX="58.0" layoutY="351.0" text="Company Name" visible="false" />
+      <TextField fx:id="partMachineId" layoutX="174.0" layoutY="346.0" prefHeight="31.0" prefWidth="222.0" promptText="Mach ID" />
+      <Label disable="false" layoutX="58.0" layoutY="351.0" text="Machine ID" visible="true" />
    </children>
 </AnchorPane>
