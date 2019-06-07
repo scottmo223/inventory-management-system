@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 /**
@@ -41,9 +43,17 @@ public class ModifyPartController implements Initializable {
     @FXML
     private TextField partMax;
     @FXML
-    private TextField partCompanyName;
-    @FXML
     private TextField partMin;
+    @FXML
+    private TextField partCompanyIdField;
+    @FXML
+    private TextField partMachineIdField;
+    @FXML
+    private ToggleGroup partTypeToggleGroup;
+    @FXML
+    private Label partCompanyIdLabel;
+    @FXML
+    private Label partMachineIdLabel;
 
     /**
      * Initializes the controller class.
@@ -63,4 +73,19 @@ public class ModifyPartController implements Initializable {
         stage.close();
     }
     
+    @FXML
+    private void isOutsourced(ActionEvent event) {
+        partCompanyIdLabel.setVisible(true);
+        partMachineIdLabel.setVisible(false);
+        partCompanyIdField.setVisible(true);
+        partMachineIdField.setVisible(false);
+    }
+    
+    @FXML
+    private void isInhouse(ActionEvent event) {
+        partCompanyIdLabel.setVisible(false);
+        partMachineIdLabel.setVisible(true);
+        partCompanyIdField.setVisible(false);
+        partMachineIdField.setVisible(true);
+    }
 }
