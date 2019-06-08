@@ -35,8 +35,6 @@ public class AddProductController implements Initializable {
     @FXML
     private TableColumn<?, ?> partPrice;
     @FXML
-    private Button partDelete;
-    @FXML
     private TableColumn<?, ?> searchPartID;
     @FXML
     private TableColumn<?, ?> searchPartName;
@@ -62,6 +60,8 @@ public class AddProductController implements Initializable {
     private TextField partMax;
     @FXML
     private TextField partMin;
+    @FXML
+    private Button productSave;
 
     /**
      * Initializes the controller class.
@@ -87,6 +87,10 @@ public class AddProductController implements Initializable {
     private void exitHandler(ActionEvent event) {
         Stage stage = (Stage) exit.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void saveHandler(ActionEvent event) {
     }
     
 }

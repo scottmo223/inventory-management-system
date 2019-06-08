@@ -23,19 +23,7 @@ import javafx.stage.Stage;
 public class ModifyProductController implements Initializable {
 
     @FXML
-    private Button partSearch;
-    @FXML
     private TextField searchInput;
-    @FXML
-    private TableColumn<?, ?> partPartID;
-    @FXML
-    private TableColumn<?, ?> partPartName;
-    @FXML
-    private TableColumn<?, ?> partInventory;
-    @FXML
-    private TableColumn<?, ?> partPrice;
-    @FXML
-    private Button partDelete;
     @FXML
     private TableColumn<?, ?> searchPartID;
     @FXML
@@ -51,17 +39,29 @@ public class ModifyProductController implements Initializable {
     @FXML
     private Button exit;
     @FXML
-    private TextField partID;
+    private Button productSearch;
     @FXML
-    private TextField partName;
+    private TableColumn<?, ?> productPartID;
     @FXML
-    private TextField partInv;
+    private TableColumn<?, ?> productPartName;
     @FXML
-    private TextField partCost;
+    private TableColumn<?, ?> productInventory;
     @FXML
-    private TextField partMax;
+    private TableColumn<?, ?> productPrice;
     @FXML
-    private TextField partMin;
+    private Button productSave;
+    @FXML
+    private TextField productID;
+    @FXML
+    private TextField productName;
+    @FXML
+    private TextField productInv;
+    @FXML
+    private TextField productCost;
+    @FXML
+    private TextField productMax;
+    @FXML
+    private TextField productMin;
 
     /**
      * Initializes the controller class.
