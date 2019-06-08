@@ -69,7 +69,7 @@ public class AddPartController implements Initializable {
 
     @FXML
     private void saveHandler(ActionEvent event) {
-        int id = 1;
+        int id = Model.Inventory.getAllParts().size() + 1;
         String name = partName.getText();
         int stock = Integer.parseInt(partInv.getText());
         double price = Double.parseDouble(partCost.getText());
