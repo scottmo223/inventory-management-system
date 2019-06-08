@@ -22,7 +22,14 @@ public class Inventory {
     public static void addProduct(Product product){
         allProducts.add(product);
     }
-    public Part lookupPart(int partId){
+    public static Part lookupPart(int partId){
+        for(Part searchedPart : Model.Inventory.getAllParts()){
+            if (searchedPart.getId() == partId) {
+                System.out.println("Found");
+                return searchedPart;
+            }            
+        }
+        System.out.println("Not found");
         return null;
     }
     public Product lookupProduct(int productId){
@@ -40,8 +47,8 @@ public class Inventory {
     public void updateProduct(int index, Product product){
         
     }
-    public void deletePart(Part part){
-        
+    public static void deletePart(Part part){
+        allParts.remove(part);
     }
     public void deleteProduct(Product product){
         

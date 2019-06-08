@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import Model.Part;
 import Model.Inventory;
 import Model.Product;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -97,6 +98,8 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void searchHandler(ActionEvent event) {
+        int searchPartId = Integer.parseInt(partSearchInput.getText());
+        Model.Inventory.lookupPart(searchPartId);
     }
 
     @FXML
@@ -145,6 +148,8 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void deleteHandler(ActionEvent event) {
+//        ObjectProperty<TableView.TableViewSelectionModel<Part>> selectionModelProperty = partTableView.selectionModelProperty();
+//        Model.Inventory.deletePart(selectionModelProperty);
     }
 
     @FXML

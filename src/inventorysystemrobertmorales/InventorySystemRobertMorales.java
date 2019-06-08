@@ -35,9 +35,9 @@ public class InventorySystemRobertMorales extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         InhousePart part1 = new InhousePart(11, "poop", 12.95, 19, 10, 20, 452);
-         InhousePart part2 = new InhousePart(12, "pee", 14.95, 6, 3, 15, 419);
-         InhousePart part3 = new InhousePart(13, "Urine", 200.01, 100, 99, 1000, 3);
+         InhousePart part1 = new InhousePart(1, "poop", 12.95, 19, 10, 20, 452);
+         InhousePart part2 = new InhousePart(2, "pee", 14.95, 6, 3, 15, 419);
+         InhousePart part3 = new InhousePart(3, "Urine", 200.01, 100, 99, 1000, 3);
          
          Product prod1 = new Product(1, "lolly", 1002.30, 50, 40, 100);
          Product prod2 = new Product(2, "pop", 1232.51, 40, 20, 600);
@@ -56,4 +56,4 @@ public class InventorySystemRobertMorales extends Application {
     
 }
 
-//observable list and table views III ended at 0:17:51
+//observable list and table views III ended at 0:36:52
