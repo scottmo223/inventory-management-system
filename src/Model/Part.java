@@ -38,7 +38,7 @@ public abstract class Part {
         this.price = price;
     }
     public void setPrice(int price){
-        this.price = Double.valueOf(price); //converted int to double. WORKS???
+        this.price = Double.valueOf(price); //converted int to double.
     }
     public void setStock(int stock){
         this.stock = stock;

@@ -5,6 +5,8 @@
  */
 package View_Controller;
 
+import Model.InhousePart;
+import Model.OutsourcedPart;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -69,10 +71,17 @@ public class AddPartController implements Initializable {
     private void saveHandler(ActionEvent event) {
         int id = 1;
         String name = partName.getText();
-        int inventory = Integer.parseInt(partInv.getText());
-        double cost = Double.parseDouble(partCost.getText());
+        int stock = Integer.parseInt(partInv.getText());
+        double price = Double.parseDouble(partCost.getText());
         int max = Integer.parseInt(partMax.getText());
         int min = Integer.parseInt(partMin.getText());
+        String company = partCompanyIdField.getText();
+        int machineId = inhouse.isSelected() ? Integer.parseInt(partMachineIdField.getText()) : 0;
+        
+        Model.Inventory.addPart(inhouse.isSelected() ? new InhousePart(id, name, price, stock, min, max, machineId) : new OutsourcedPart(id, name, price, stock, min, max, company));
+        
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
