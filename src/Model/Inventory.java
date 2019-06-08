@@ -25,7 +25,6 @@ public class Inventory {
     public static Part lookupPart(int partId){
         for(Part searchedPart : Model.Inventory.getAllParts()){
             if (searchedPart.getId() == partId) {
-                System.out.println("Found");
                 return searchedPart;
             }            
         }
@@ -41,8 +40,16 @@ public class Inventory {
     public ObservableList<Product> lookupProduct(String productName){
         return null;
     }
-    public void updatePart(int index, Part part){
-        
+    public static void updatePart(int index, Part part){
+        //this is all from video, may ONLY need the .set method
+//        int counter = -1;
+//        for(Part oldPart : Model.Inventory.getAllParts()){
+//            counter++;                                        !!!!!!!THIS DOESN'T WORK - WON'T COMPILE!!!!!!!
+//            if (oldPart.getId() == index) {
+//                getAllParts().set(counter, part);
+//         
+//            }            
+//        }
     }
     public void updateProduct(int index, Product product){
         
@@ -50,8 +57,8 @@ public class Inventory {
     public static void deletePart(Part part){
         allParts.remove(part);
     }
-    public void deleteProduct(Product product){
-        
+    public static void deleteProduct(Product product){
+        allProducts.remove(product);
     }
     public static ObservableList<Part> getAllParts(){
         return allParts;
@@ -60,3 +67,7 @@ public class Inventory {
         return allProducts;
     }
 }
+//the bottom two are members of getSelectionModel()
+//use getSelectedItem() to return object from TableView.
+//select() will automatically select a row or object in a table.
+//ex: partTableView.getSelectionModel().select(part);

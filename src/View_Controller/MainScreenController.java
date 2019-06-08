@@ -99,7 +99,8 @@ public class MainScreenController implements Initializable {
     @FXML
     private void searchHandler(ActionEvent event) {
         int searchPartId = Integer.parseInt(partSearchInput.getText());
-        Model.Inventory.lookupPart(searchPartId);
+        Part searchedPart = Model.Inventory.lookupPart(searchPartId);
+        partTableView.getSelectionModel().select(searchedPart);
     }
 
     @FXML
@@ -148,8 +149,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void deleteHandler(ActionEvent event) {
-//        ObjectProperty<TableView.TableViewSelectionModel<Part>> selectionModelProperty = partTableView.selectionModelProperty();
-//        Model.Inventory.deletePart(selectionModelProperty);
+        Model.Inventory.deletePart(partTableView.getSelectionModel().getSelectedItem());
     }
 
     @FXML
