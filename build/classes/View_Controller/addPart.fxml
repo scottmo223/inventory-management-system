@@ -17,12 +17,12 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <RadioButton fx:id="inhouse" layoutX="174.0" layoutY="31.0" mnemonicParsing="false" onAction="#isInhouse" selected="true" text="In-House">
+      <RadioButton fx:id="inhouse" layoutX="174.0" layoutY="31.0" mnemonicParsing="false" onAction="#isOutsourced" selected="true" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="partTypeToggleGroup" />
          </toggleGroup></RadioButton>      
       <RadioButton fx:id="outsourced" layoutX="292.0" layoutY="31.0" mnemonicParsing="false" onAction="#isOutsourced" text="Outsourced" toggleGroup="$partTypeToggleGroup" />
-      <TextField fx:id="partID" editable="false" layoutX="174.0" layoutY="96.0" prefHeight="31.0" prefWidth="222.0" style="-fx-background-color: gray; -fx-border-color: gray;" text="Auto Gen - Disabled" />
+      <TextField fx:id="partID" editable="false" layoutX="174.0" layoutY="96.0" prefHeight="31.0" prefWidth="222.0" style="-fx-background-color: none; -fx-border-color: gray;" text="Auto Gen - Disabled" />
       <Label layoutX="58.0" layoutY="101.0" text="ID" />
       <TextField fx:id="partName" layoutX="174.0" layoutY="146.0" prefHeight="31.0" prefWidth="222.0" promptText="Part Name" />
       <Label layoutX="58.0" layoutY="151.0" text="Name" />

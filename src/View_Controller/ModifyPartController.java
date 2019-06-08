@@ -75,17 +75,10 @@ public class ModifyPartController implements Initializable {
     
     @FXML
     private void isOutsourced(ActionEvent event) {
-        partCompanyIdLabel.setVisible(true);
-        partMachineIdLabel.setVisible(false);
-        partCompanyIdField.setVisible(true);
-        partMachineIdField.setVisible(false);
+        partCompanyIdLabel.setVisible(outsourced.isSelected());
+        partCompanyIdField.setVisible(outsourced.isSelected());
+        partMachineIdLabel.setVisible(!outsourced.isSelected());
+        partMachineIdField.setVisible(!outsourced.isSelected());
     }
-    
-    @FXML
-    private void isInhouse(ActionEvent event) {
-        partCompanyIdLabel.setVisible(false);
-        partMachineIdLabel.setVisible(true);
-        partCompanyIdField.setVisible(false);
-        partMachineIdField.setVisible(true);
-    }
+   
 }
