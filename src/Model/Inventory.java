@@ -31,7 +31,13 @@ public class Inventory {
         System.out.println("Not found");
         return null;
     }
-    public Product lookupProduct(int productId){
+    public static Product lookupProduct(int productId){
+        for(Product searchedProduct : Model.Inventory.getAllProducts()){
+            if (searchedProduct.getId() == productId) {
+                return searchedProduct;
+            }            
+        }
+        System.out.println("Not found");
         return null;
     }
     public ObservableList<Part> lookupPart(String partName){
@@ -41,18 +47,10 @@ public class Inventory {
         return null;
     }
     public static void updatePart(int index, Part part){
-        //this is all from video, may ONLY need the .set method
-//        int counter = -1;
-//        for(Part oldPart : Model.Inventory.getAllParts()){
-//            counter++;                                        !!!!!!!THIS DOESN'T WORK - WON'T COMPILE!!!!!!!
-//            if (oldPart.getId() == index) {
-//                getAllParts().set(counter, part);
-//         
-//            }            
-//        }
+        getAllParts().set(index, part);
     }
     public void updateProduct(int index, Product product){
-        
+        getAllProducts().set(index, product);
     }
     public static void deletePart(Part part){
         allParts.remove(part);
