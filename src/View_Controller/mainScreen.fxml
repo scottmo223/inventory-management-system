@@ -23,7 +23,7 @@
                </font>
             </Label>
             <Button fx:id="partSearch" layoutX="184.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchHandler" text="Search" />
-            <TextField fx:id="partSearchInput" layoutX="255.0" layoutY="18.0" prefHeight="31.0" prefWidth="215.0" />
+            <TextField fx:id="partSearchInput" layoutX="255.0" layoutY="18.0" onKeyTyped="#resetTable" prefHeight="31.0" prefWidth="215.0" />
             <TableView fx:id="partTableView" layoutX="13.0" layoutY="57.0" prefHeight="180.0" prefWidth="458.0">
               <columns>
                 <TableColumn fx:id="partPartID" prefWidth="75.0" text="Part ID" />
@@ -45,7 +45,7 @@
                </font>
             </Label>
             <Button fx:id="productSearch" layoutX="184.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchHandler" text="Search" />
-            <TextField fx:id="productSearchInput" layoutX="255.0" layoutY="18.0" prefHeight="31.0" prefWidth="215.0" />
+            <TextField fx:id="productSearchInput" layoutX="255.0" layoutY="18.0" onKeyTyped="#resetTable" prefHeight="31.0" prefWidth="215.0" />
             <TableView fx:id="productTableView" layoutX="13.0" layoutY="57.0" prefHeight="180.0" prefWidth="458.0">
                <columns>
                   <TableColumn fx:id="productPartID" prefWidth="90.0" text="Product ID" />

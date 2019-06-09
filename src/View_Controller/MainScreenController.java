@@ -20,6 +20,7 @@ import Model.Inventory;
 import Model.Product;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -90,17 +91,30 @@ public class MainScreenController implements Initializable {
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }    
 
+    
+    
     @FXML
     private void searchHandler(ActionEvent event) {
         if(event.getSource() == partSearch){
-            int searchPartId = Integer.parseInt(partSearchInput.getText());
-            Part searchedPart = Model.Inventory.lookupPart(searchPartId);
-            partTableView.getSelectionModel().select(searchedPart);
+            try {
+                int searchPartId = Integer.parseInt(partSearchInput.getText());
+                Part searchedPart = Model.Inventory.lookupPart(searchPartId);
+                partTableView.getSelectionModel().select(searchedPart);
+            } catch (NumberFormatException e) {
+                String searchPartName = partSearchInput.getText();
+                partTableView.setItems(Model.Inventory.lookupPart(searchPartName));
+            }
+            
         }
         else if(event.getSource() == productSearch){
-            int searchProductId = Integer.parseInt(productSearchInput.getText());
-            Product searchedProduct = Model.Inventory.lookupProduct(searchProductId);
-            productTableView.getSelectionModel().select(searchedProduct);
+            try {    
+                int searchProductId = Integer.parseInt(productSearchInput.getText());
+                Product searchedProduct = Model.Inventory.lookupProduct(searchProductId);
+                productTableView.getSelectionModel().select(searchedProduct);
+            } catch (NumberFormatException e) {
+                String searchProductName = productSearchInput.getText();
+                productTableView.setItems(Model.Inventory.lookupProduct(searchProductName));
+            }
         }
     }
 
@@ -163,5 +177,11 @@ public class MainScreenController implements Initializable {
     @FXML
     private void exitHandler(ActionEvent event) {
         Platform.exit();
+    }
+
+    @FXML
+    private void resetTable(KeyEvent event) {
+        if(event.getSource() == partSearchInput) partTableView.setItems(Inventory.getAllParts());
+        else if(event.getSource() == productSearchInput) productTableView.setItems(Inventory.getAllProducts());
     }
 }

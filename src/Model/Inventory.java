@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Part> searchedParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> searchedProducts = FXCollections.observableArrayList();
     
     public static void addPart(Part part){
         allParts.add(part);
@@ -40,23 +42,23 @@ public class Inventory {
     }
     
     public static ObservableList<Part> lookupPart(String partName){
-        ObservableList<Part> matchingParts = FXCollections.observableArrayList();
+        searchedParts.clear();
         for (Part part : getAllParts()) {
             if(part.getName().contains(partName)) {
-                matchingParts.add(part);
+                searchedParts.add(part);
             }
         }
-        return matchingParts;
+        return searchedParts;
     }
     
     public static ObservableList<Product> lookupProduct(String productName){
-        ObservableList<Product> matchingProducts = FXCollections.observableArrayList();
+        searchedProducts.clear();
         for (Product product : getAllProducts()) {
             if(product.getName().contains(productName)) {
-                matchingProducts.add(product);
+                searchedProducts.add(product);
             }
         }
-        return matchingProducts;
+        return searchedProducts;
     }
     
     public static void updatePart(int index, Part part){
@@ -69,10 +71,12 @@ public class Inventory {
     
     public static void deletePart(Part part){
         allParts.remove(part);
+        searchedParts.remove(part);
     }
     
     public static void deleteProduct(Product product){
         allProducts.remove(product);
+        searchedProducts.remove(product);
     }
     
     public static ObservableList<Part> getAllParts(){
