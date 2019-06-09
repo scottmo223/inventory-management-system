@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View_Controller;
 
 import java.io.IOException;
@@ -23,14 +18,13 @@ import javafx.stage.Stage;
 import Model.Part;
 import Model.Inventory;
 import Model.Product;
-import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
  *
- * @author Scott
+ * @author Scott.Morales
  */
 public class MainScreenController implements Initializable {
 
@@ -170,5 +164,4 @@ public class MainScreenController implements Initializable {
     private void exitHandler(ActionEvent event) {
         Platform.exit();
     }
-    
 }

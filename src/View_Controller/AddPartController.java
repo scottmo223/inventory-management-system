@@ -5,6 +5,7 @@
  */
 package View_Controller;
 
+import Model.Part;
 import Model.InhousePart;
 import Model.OutsourcedPart;
 import java.net.URL;
@@ -69,7 +70,12 @@ public class AddPartController implements Initializable {
 
     @FXML
     private void saveHandler(ActionEvent event) {
-        int id = Model.Inventory.getAllParts().size() + 1;
+        int id;
+        try {        //no duplicate part #'s and start at 1 if no parts
+            id = Model.Inventory.getAllParts().get(Model.Inventory.getAllParts().size()-1).getId() + 1;
+        } catch (IndexOutOfBoundsException e) {
+            id = 1;
+        }
         String name = partName.getText();
         int stock = Integer.parseInt(partInv.getText());
         double price = Double.parseDouble(partCost.getText());
