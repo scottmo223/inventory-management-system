@@ -5,6 +5,8 @@
  */
 package View_Controller;
 
+import Model.InhousePart;
+import Model.OutsourcedPart;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import Model.Part;
 
 /**
  * FXML Controller class
@@ -54,6 +57,7 @@ public class ModifyPartController implements Initializable {
     private Label partCompanyIdLabel;
     @FXML
     private Label partMachineIdLabel;
+    Part part;
 
     /**
      * Initializes the controller class.
@@ -80,5 +84,18 @@ public class ModifyPartController implements Initializable {
         partMachineIdLabel.setVisible(!outsourced.isSelected());
         partMachineIdField.setVisible(!outsourced.isSelected());
     }
-   
+    
+    public void setPart(Part part) {
+        this.part = part;
+        
+        partID.setText(Integer.toString(part.getId()));
+        partName.setText(part.getName());
+        partInv.setText(Integer.toString(part.getStock()));
+        partCost.setText(Double.toString(part.getPrice()));
+        partMin.setText(Integer.toString(part.getMin()));
+        partMax.setText(Integer.toString(part.getMax()));
+        
+        if(part instanceof OutsourcedPart) partCompanyIdField.setText(((OutsourcedPart) part).getCompanyName());
+        else if (part instanceof InhousePart) partMachineIdField.setText(Integer.toString(((InhousePart) part).getMachineId()));
+    }
 }

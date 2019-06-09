@@ -128,6 +128,9 @@ public class MainScreenController implements Initializable {
             stage.setTitle("Modify Part");
             stage.setScene(new Scene(mainParent));  
             stage.show();
+            ModifyPartController controller = fxmlLoader.getController();
+            Part part = partTableView.getSelectionModel().getSelectedItem();
+            controller.setPart(part);
         }
         else if(event.getSource() == productModify){
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyProduct.fxml"));
@@ -137,6 +140,7 @@ public class MainScreenController implements Initializable {
             stage.setTitle("Modify Product");
             stage.setScene(new Scene(mainParent));  
             stage.show();
+            
         }        
     }
 
