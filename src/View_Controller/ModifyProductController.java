@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import Model.Part;
 import Model.Inventory;
 import Model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
@@ -72,6 +74,7 @@ public class ModifyProductController implements Initializable {
     private TextField productMin;
     @FXML
     private Button partSearch;
+    private ObservableList<Part> addedParts = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -84,6 +87,12 @@ public class ModifyProductController implements Initializable {
         partInventoryAll.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameAll.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceAll.setCellValueFactory(new PropertyValueFactory<>("price"));
+        
+        partTableViewProduct.setItems(addedParts);
+        partPartIDProduct.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partInventoryProduct.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPartNameProduct.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPriceProduct.setCellValueFactory(new PropertyValueFactory<>("price"));
     }    
 
     @FXML
@@ -108,6 +117,8 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void addHandler(ActionEvent event) {
+        Part part = partTableViewAll.getSelectionModel().getSelectedItem();
+        addedParts.add(part);
     }
 
     @FXML
