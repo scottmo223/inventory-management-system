@@ -127,6 +127,27 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void saveHandler(ActionEvent event) {
+        int id;
+        try {        //no duplicate part #'s and start at 1 if no parts
+            id = Model.Inventory.getAllProducts().get(Model.Inventory.getAllProducts().size()-1).getId() + 1;
+        } catch (IndexOutOfBoundsException e) {
+            id = 1;
+        }
+        String name = partName.getText();
+        int stock = Integer.parseInt(partInv.getText());
+        double price = Double.parseDouble(partCost.getText());
+        int max = Integer.parseInt(partMax.getText());
+        int min = Integer.parseInt(partMin.getText());
+        
+        Product newProduct = new Product(id, name, price, stock, min, max);
+        for (Part addedPart : addedParts) {
+            newProduct.addAssociatedPart(addedPart); //null pointer
+        }
+        
+        Model.Inventory.addProduct(newProduct);
+        
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
     }
     
     @FXML

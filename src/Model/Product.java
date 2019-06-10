@@ -5,6 +5,7 @@
  */
 package Model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -12,7 +13,7 @@ import javafx.collections.ObservableList;
  * @author Scott
  */
 public class Product {
-    private ObservableList<Part> associatedParts;
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     private int id;
     private String name;
     private double price;
@@ -72,12 +73,12 @@ public class Product {
     }
     // ************THE LIST************
     public void addAssociatedPart(Part part){
-        //not sure?????????????????
+        associatedParts.add(part); //null pointer
     }
     public void deleteAssociatedPart(Part part){
-        //again, not sure??????????
+        associatedParts.remove(part);
     }
-//    public ObservableList<Part> getAllAssociatedParts(){
-//        return this.associatedParts;
-//    }
+    public ObservableList<Part> getAllAssociatedParts(){
+        return this.associatedParts;
+    }
 }
