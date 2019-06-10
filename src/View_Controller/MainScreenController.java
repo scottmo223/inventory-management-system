@@ -18,6 +18,11 @@ import javafx.stage.Stage;
 import Model.Part;
 import Model.Inventory;
 import Model.Product;
+import java.text.NumberFormat;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
+import javafx.scene.control.Cell;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -71,6 +76,7 @@ public class MainScreenController implements Initializable {
     private TableView<Part> partTableView;
     @FXML
     private TableView<Product> productTableView;
+    private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     /**
      * Initializes the controller class.
@@ -83,14 +89,28 @@ public class MainScreenController implements Initializable {
         partInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partPrice.setCellFactory(tc -> new TableCell<Part, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                setText(empty ? null : currencyFormat.format(price));
+                setAlignment(Pos.CENTER_RIGHT);
+            }
+        });
         
         productTableView.setItems(Inventory.getAllProducts());
         productPartID.setCellValueFactory(new PropertyValueFactory<>("id"));
         productInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-    }    
-    
+        productPrice.setCellFactory(tc -> new TableCell<Product, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                setText(empty ? null : currencyFormat.format(price));
+                setAlignment(Pos.CENTER_RIGHT);
+            }
+        });
+    }
+        
     @FXML
     private void searchHandler(ActionEvent event) {
         if(event.getSource() == partSearch){
