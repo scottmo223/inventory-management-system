@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View_Controller;
 
 import java.net.URL;
@@ -26,7 +21,7 @@ import javafx.scene.input.KeyEvent;
 /**
  * FXML Controller class
  *
- * @author Scott
+ * @author Scott.Morales
  */
 public class AddProductController implements Initializable {
 
@@ -37,23 +32,23 @@ public class AddProductController implements Initializable {
     @FXML
     private TableView<Part> partTableViewAll;
     @FXML
-    private TableColumn<?, ?> partPartIDAll;
+    private TableColumn<Part, Integer> partPartIDAll;
     @FXML
-    private TableColumn<?, ?> partPartNameAll;
+    private TableColumn<Part, String> partPartNameAll;
     @FXML
-    private TableColumn<?, ?> partInventoryAll;
+    private TableColumn<Part, Integer> partInventoryAll;
     @FXML
-    private TableColumn<?, ?> partPriceAll;
+    private TableColumn<Part, Double> partPriceAll;
     @FXML
     private TableView<Part> partTableViewProduct;
     @FXML
-    private TableColumn<?, ?> partPartIDProduct;
+    private TableColumn<Part, Integer> partPartIDProduct;
     @FXML
-    private TableColumn<?, ?> partPartNameProduct;
+    private TableColumn<Part, String> partPartNameProduct;
     @FXML
-    private TableColumn<?, ?> partInventoryProduct;
+    private TableColumn<Part, Integer> partInventoryProduct;
     @FXML
-    private TableColumn<?, ?> partPriceProduct;
+    private TableColumn<Part, Double> partPriceProduct;
     @FXML
     private Button productAdd;
     @FXML
@@ -141,7 +136,7 @@ public class AddProductController implements Initializable {
         
         Product newProduct = new Product(id, name, price, stock, min, max);
         for (Part addedPart : addedParts) {
-            newProduct.addAssociatedPart(addedPart); //null pointer
+            newProduct.addAssociatedPart(addedPart);
         }
         
         Model.Inventory.addProduct(newProduct);
