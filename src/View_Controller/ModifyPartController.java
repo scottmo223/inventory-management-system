@@ -111,7 +111,16 @@ public class ModifyPartController implements Initializable {
         partMin.setText(Integer.toString(part.getMin()));
         partMax.setText(Integer.toString(part.getMax()));
         
-        if(part instanceof OutsourcedPart) partCompanyIdField.setText(((OutsourcedPart) part).getCompanyName());
-        else if (part instanceof InhousePart) partMachineIdField.setText(Integer.toString(((InhousePart) part).getMachineId()));
+        if(part instanceof OutsourcedPart) {
+            partCompanyIdField.setText(((OutsourcedPart) part).getCompanyName());
+            outsourced.setSelected(true);
+            partCompanyIdLabel.setVisible(outsourced.isSelected());
+            partCompanyIdField.setVisible(outsourced.isSelected());
+            partMachineIdLabel.setVisible(!outsourced.isSelected());
+            partMachineIdField.setVisible(!outsourced.isSelected());
+        }
+        else if (part instanceof InhousePart) {
+            partMachineIdField.setText(Integer.toString(((InhousePart) part).getMachineId()));
+        }
     }
 }
