@@ -113,6 +113,8 @@ public class ModifyProductController implements Initializable {
     
     @FXML
     private void deleteHandler(ActionEvent event) {
+        Part part = partTableViewProduct.getSelectionModel().getSelectedItem();
+        addedParts.remove(part);
     }
 
     @FXML
