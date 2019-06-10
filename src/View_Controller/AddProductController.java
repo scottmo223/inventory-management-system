@@ -12,8 +12,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import Model.Part;
+import Model.Inventory;
+import Model.Product;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -27,21 +33,25 @@ public class AddProductController implements Initializable {
     @FXML
     private TextField searchInput;
     @FXML
-    private TableColumn<?, ?> partPartID;
+    private TableView<Part> partTableViewAll;
     @FXML
-    private TableColumn<?, ?> partPartName;
+    private TableColumn<?, ?> partPartIDAll;
     @FXML
-    private TableColumn<?, ?> partInventory;
+    private TableColumn<?, ?> partPartNameAll;
     @FXML
-    private TableColumn<?, ?> partPrice;
+    private TableColumn<?, ?> partInventoryAll;
     @FXML
-    private TableColumn<?, ?> searchPartID;
+    private TableColumn<?, ?> partPriceAll;
     @FXML
-    private TableColumn<?, ?> searchPartName;
+    private TableView<Part> partTableViewProduct;
     @FXML
-    private TableColumn<?, ?> searchInventory;
+    private TableColumn<?, ?> partPartIDProduct;
     @FXML
-    private TableColumn<?, ?> searchPrice;
+    private TableColumn<?, ?> partPartNameProduct;
+    @FXML
+    private TableColumn<?, ?> partInventoryProduct;
+    @FXML
+    private TableColumn<?, ?> partPriceProduct;
     @FXML
     private Button productAdd;
     @FXML
@@ -69,10 +79,23 @@ public class AddProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        partTableViewAll.setItems(Inventory.getAllParts());
+        partPartIDAll.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partInventoryAll.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPartNameAll.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPriceAll.setCellValueFactory(new PropertyValueFactory<>("price"));
     }    
 
     @FXML
     private void searchHandler(ActionEvent event) {
+        try {
+                int searchPartId = Integer.parseInt(searchInput.getText());
+                Part searchedPart = Model.Inventory.lookupPart(searchPartId);
+                partTableViewAll.getSelectionModel().select(searchedPart);
+            } catch (NumberFormatException e) {
+                String searchPartName = searchInput.getText();
+                partTableViewAll.setItems(Model.Inventory.lookupPart(searchPartName));
+            }
     }
 
     @FXML
@@ -93,4 +116,8 @@ public class AddProductController implements Initializable {
     private void saveHandler(ActionEvent event) {
     }
     
+    @FXML
+    private void resetTable(KeyEvent event) {
+        partTableViewAll.setItems(Inventory.getAllParts());
+    }
 }

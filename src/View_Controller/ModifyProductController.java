@@ -12,8 +12,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import Model.Part;
+import Model.Inventory;
+import Model.Product;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -23,31 +29,33 @@ import javafx.stage.Stage;
 public class ModifyProductController implements Initializable {
 
     @FXML
+    private TableView<Part> partTableViewAll;
+    @FXML
+    private TableColumn<?, ?> partPartIDAll;
+    @FXML
+    private TableColumn<?, ?> partPartNameAll;
+    @FXML
+    private TableColumn<?, ?> partInventoryAll;
+    @FXML
+    private TableColumn<?, ?> partPriceAll;
+    @FXML
+    private TableView<Part> partTableViewProduct;
+    @FXML
+    private TableColumn<?, ?> partPartIDProduct;
+    @FXML
+    private TableColumn<?, ?> partPartNameProduct;
+    @FXML
+    private TableColumn<?, ?> partInventoryProduct;
+    @FXML
+    private TableColumn<?, ?> partPriceProduct;
+    @FXML
     private TextField searchInput;
-    @FXML
-    private TableColumn<?, ?> searchPartID;
-    @FXML
-    private TableColumn<?, ?> searchPartName;
-    @FXML
-    private TableColumn<?, ?> searchInventory;
-    @FXML
-    private TableColumn<?, ?> searchPrice;
     @FXML
     private Button productAdd;
     @FXML
     private Button productDelete;
     @FXML
     private Button exit;
-    @FXML
-    private Button productSearch;
-    @FXML
-    private TableColumn<?, ?> productPartID;
-    @FXML
-    private TableColumn<?, ?> productPartName;
-    @FXML
-    private TableColumn<?, ?> productInventory;
-    @FXML
-    private TableColumn<?, ?> productPrice;
     @FXML
     private Button productSave;
     @FXML
@@ -62,6 +70,8 @@ public class ModifyProductController implements Initializable {
     private TextField productMax;
     @FXML
     private TextField productMin;
+    @FXML
+    private Button partSearch;
 
     /**
      * Initializes the controller class.
@@ -69,10 +79,23 @@ public class ModifyProductController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        partTableViewAll.setItems(Inventory.getAllParts()); //this line caused error
+        partPartIDAll.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partInventoryAll.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPartNameAll.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partPriceAll.setCellValueFactory(new PropertyValueFactory<>("price"));
     }    
 
     @FXML
     private void searchHandler(ActionEvent event) {
+        try {
+                int searchPartId = Integer.parseInt(searchInput.getText());
+                Part searchedPart = Model.Inventory.lookupPart(searchPartId);
+                partTableViewAll.getSelectionModel().select(searchedPart);
+            } catch (NumberFormatException e) {
+                String searchPartName = searchInput.getText();
+                partTableViewAll.setItems(Model.Inventory.lookupPart(searchPartName));
+            }
     }
 
     @FXML
@@ -93,4 +116,8 @@ public class ModifyProductController implements Initializable {
         stage.close();
     }
     
+    @FXML
+    private void resetTable(KeyEvent event) {
+        partTableViewAll.setItems(Inventory.getAllParts());
+    }
 }
