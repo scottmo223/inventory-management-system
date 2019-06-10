@@ -13,8 +13,11 @@ import javafx.stage.Stage;
 import Model.Part;
 import Model.Inventory;
 import Model.Product;
+import java.text.NumberFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
@@ -70,6 +73,7 @@ public class AddProductController implements Initializable {
     @FXML
     private Button productSave;
     private ObservableList<Part> addedParts = FXCollections.observableArrayList();
+    private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     /**
      * Initializes the controller class.
@@ -82,12 +86,26 @@ public class AddProductController implements Initializable {
         partInventoryAll.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameAll.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceAll.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partPriceAll.setCellFactory(tc -> new TableCell<Part, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                setText(empty ? null : currencyFormat.format(price));
+                setAlignment(Pos.CENTER_RIGHT);
+            }
+        });
         
         partTableViewProduct.setItems(addedParts);
         partPartIDProduct.setCellValueFactory(new PropertyValueFactory<>("id"));
         partInventoryProduct.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameProduct.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceProduct.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partPriceProduct.setCellFactory(tc -> new TableCell<Part, Double>() {
+            @Override
+            protected void updateItem(Double price, boolean empty) {
+                setText(empty ? null : currencyFormat.format(price));
+                setAlignment(Pos.CENTER_RIGHT);
+            }
+        });
     }    
 
     @FXML
