@@ -110,6 +110,23 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void saveHandler(ActionEvent event) {
+        int id = Integer.parseInt(productID.getText());
+        String name = productName.getText();
+        int stock = Integer.parseInt(productInv.getText());
+        double price = Double.parseDouble(productCost.getText());
+        int max = Integer.parseInt(productMax.getText());
+        int min = Integer.parseInt(productMin.getText());
+                
+        Product updatedProduct = new Product(id, name, price, stock, min, max);
+        for (Part addedPart : addedParts) {
+            updatedProduct.addAssociatedPart(addedPart);
+        }
+        int productIndex = Model.Inventory.getAllProducts().indexOf(Model.Inventory.lookupProduct(id));
+        
+        Model.Inventory.updateProduct(productIndex, updatedProduct);
+        
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
     }
     
     @FXML
