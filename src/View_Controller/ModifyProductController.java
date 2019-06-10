@@ -74,6 +74,7 @@ public class ModifyProductController implements Initializable {
     private TextField productMin;
     @FXML
     private Button partSearch;
+    private Product product;
     private ObservableList<Part> addedParts = FXCollections.observableArrayList();
 
     /**
@@ -132,5 +133,20 @@ public class ModifyProductController implements Initializable {
     @FXML
     private void resetTable(KeyEvent event) {
         partTableViewAll.setItems(Inventory.getAllParts());
+    }
+    
+    public void setProduct(Product product) {
+        this.product = product;
+        
+        productID.setText(Integer.toString(product.getId()));
+        productName.setText(product.getName());
+        productInv.setText(Integer.toString(product.getStock()));
+        productCost.setText(Double.toString(product.getPrice()));
+        productMin.setText(Integer.toString(product.getMin()));
+        productMax.setText(Integer.toString(product.getMax()));
+        
+        for (Part loadedPart : product.getAllAssociatedParts()) {
+            addedParts.add(loadedPart);
+        }
     }
 }

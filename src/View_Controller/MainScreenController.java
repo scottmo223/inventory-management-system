@@ -140,7 +140,9 @@ public class MainScreenController implements Initializable {
             stage.setTitle("Modify Product");
             stage.setScene(new Scene(mainParent));  
             stage.show();
-            
+            ModifyProductController controller = fxmlLoader.getController();
+            Product product = productTableView.getSelectionModel().getSelectedItem();
+            controller.setProduct(product);
         }        
     }
 
