@@ -2,6 +2,7 @@ package inventorysystemrobertmorales;
 
 import Model.InhousePart;
 import Model.Inventory;
+import Model.OutsourcedPart;
 import Model.Product;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,7 @@ public class InventorySystemRobertMorales extends Application {
      */
     public static void main(String[] args) {
          InhousePart part1 = new InhousePart(1, "Cushion", 12.95, 19, 10, 20, 452);
-         InhousePart part2 = new InhousePart(2, "Pillow", 14.95, 6, 3, 15, 419);
+         OutsourcedPart part2 = new OutsourcedPart(2, "Pillow", 14.95, 6, 3, 15, "Ikea");
          InhousePart part3 = new InhousePart(3, "Staple", 200.01, 100, 50, 1000, 3);
          
          Product prod1 = new Product(1, "Chair", 1002.30, 50, 40, 100);
