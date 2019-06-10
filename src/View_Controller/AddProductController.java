@@ -109,6 +109,8 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void deleteHandler(ActionEvent event) {
+        Part part = partTableViewAll.getSelectionModel().getSelectedItem();
+        addedParts.remove(part);
     }
 
     @FXML
