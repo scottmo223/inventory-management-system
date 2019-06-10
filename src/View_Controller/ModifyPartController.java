@@ -69,6 +69,22 @@ public class ModifyPartController implements Initializable {
 
     @FXML
     private void saveHandler(ActionEvent event) {
+        int id = Integer.parseInt(partID.getText());
+        String name = partName.getText();
+        int stock = Integer.parseInt(partInv.getText());
+        double price = Double.parseDouble(partCost.getText());
+        int max = Integer.parseInt(partMax.getText());
+        int min = Integer.parseInt(partMin.getText());
+        String company = partCompanyIdField.getText();
+        int machineId = inhouse.isSelected() ? Integer.parseInt(partMachineIdField.getText()) : 0;
+        
+        Part updatedPart = inhouse.isSelected() ? new InhousePart(id, name, price, stock, min, max, machineId) : new OutsourcedPart(id, name, price, stock, min, max, company);
+        int partIndex = Model.Inventory.getAllParts().indexOf(Model.Inventory.lookupPart(id));
+        
+        Model.Inventory.updatePart(partIndex, updatedPart);
+        
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
