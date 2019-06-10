@@ -90,8 +90,6 @@ public class MainScreenController implements Initializable {
         productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }    
-
-    
     
     @FXML
     private void searchHandler(ActionEvent event) {
