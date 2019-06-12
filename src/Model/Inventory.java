@@ -37,7 +37,9 @@ public class Inventory {
                 return searchedProduct;
             }            
         }
-        System.out.println("Not found");
+        
+
+
         return null;
     }
     

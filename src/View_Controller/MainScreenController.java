@@ -19,9 +19,12 @@ import Model.Part;
 import Model.Inventory;
 import Model.Product;
 import java.text.NumberFormat;
+import java.util.Optional;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.control.Cell;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -188,13 +191,26 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void deleteHandler(ActionEvent event) {
-        if(event.getSource() == partDelete) {
-            Part part = partTableView.getSelectionModel().getSelectedItem();
-            Model.Inventory.deletePart(part);
-        }
-        else if(event.getSource() == productDelete){
-            Product product = productTableView.getSelectionModel().getSelectedItem();
-            Model.Inventory.deleteProduct(product);
+        Alert confirmDelete = new Alert(AlertType.CONFIRMATION);
+        confirmDelete.setTitle("Delete");
+        confirmDelete.setHeaderText(null);
+        confirmDelete.setContentText("Delete selection?");
+
+        ButtonType delete = new ButtonType("Delete");
+        ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+        confirmDelete.getButtonTypes().setAll(delete, cancel);
+
+        Optional<ButtonType> result = confirmDelete.showAndWait();
+        if (result.get() == delete){
+            if(event.getSource() == partDelete) {
+                Part part = partTableView.getSelectionModel().getSelectedItem();
+                Model.Inventory.deletePart(part);
+            }
+            else if(event.getSource() == productDelete){
+                Product product = productTableView.getSelectionModel().getSelectedItem();
+                Model.Inventory.deleteProduct(product);
+            }
         }
     }
 
