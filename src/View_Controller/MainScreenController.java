@@ -92,7 +92,7 @@ public class MainScreenController implements Initializable {
         partInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partPrice.setCellFactory(tc -> new TableCell<Part, Double>() {
+        partPrice.setCellFactory(tc -> new TableCell<Part, Double>() {          //Format Currency
             @Override
             protected void updateItem(Double price, boolean empty) {
                 setText(empty ? null : currencyFormat.format(price));
@@ -105,7 +105,7 @@ public class MainScreenController implements Initializable {
         productInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
         productPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        productPrice.setCellFactory(tc -> new TableCell<Product, Double>() {
+        productPrice.setCellFactory(tc -> new TableCell<Product, Double>() {    //Format Currency
             @Override
             protected void updateItem(Double price, boolean empty) {
                 setText(empty ? null : currencyFormat.format(price));
@@ -117,22 +117,22 @@ public class MainScreenController implements Initializable {
     @FXML
     private void searchHandler(ActionEvent event) {
         if(event.getSource() == partSearch){
-            try {
+            try {                                   //search by ID
                 int searchPartId = Integer.parseInt(partSearchInput.getText());
                 Part searchedPart = Model.Inventory.lookupPart(searchPartId);
                 partTableView.getSelectionModel().select(searchedPart);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {     //search by Name
                 String searchPartName = partSearchInput.getText();
                 partTableView.setItems(Model.Inventory.lookupPart(searchPartName));
             }
             
         }
         else if(event.getSource() == productSearch){
-            try {    
+            try {                                   //search by ID
                 int searchProductId = Integer.parseInt(productSearchInput.getText());
                 Product searchedProduct = Model.Inventory.lookupProduct(searchProductId);
                 productTableView.getSelectionModel().select(searchedProduct);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {     //search by Name
                 String searchProductName = productSearchInput.getText();
                 productTableView.setItems(Model.Inventory.lookupProduct(searchProductName));
             }
@@ -141,7 +141,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void modifyHandler(ActionEvent event) throws IOException {
-        if(event.getSource() == partModify){
+        if(event.getSource() == partModify){                //open modify part screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyPart.fxml"));
             Parent mainParent = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -151,14 +151,14 @@ public class MainScreenController implements Initializable {
             stage.show();
             ModifyPartController controller = fxmlLoader.getController();
             Part part = partTableView.getSelectionModel().getSelectedItem();
-            try{
+            try{    //check for a selection, otherwise close the modify screen
                 controller.setPart(part);
             } catch (NullPointerException e) {
                 stage.close();
                 selectionError();
             }
         }
-        else if(event.getSource() == productModify){
+        else if(event.getSource() == productModify){        //open modify part screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyProduct.fxml"));
             Parent mainParent = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -168,7 +168,7 @@ public class MainScreenController implements Initializable {
             stage.show();
             ModifyProductController controller = fxmlLoader.getController();
             Product product = productTableView.getSelectionModel().getSelectedItem();
-            try{
+            try{    //check for a selection, otherwise close the modify screen
                 controller.setProduct(product);
             } catch (NullPointerException e) {
                 stage.close();
@@ -179,7 +179,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void addHandler(ActionEvent event) throws IOException {
-        if(event.getSource() == partAdd){
+        if(event.getSource() == partAdd){           //open addPart screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addPart.fxml"));
             Parent mainParent = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -188,7 +188,7 @@ public class MainScreenController implements Initializable {
             stage.setScene(new Scene(mainParent));  
             stage.show();
         }
-        else if(event.getSource() == productAdd){
+        else if(event.getSource() == productAdd){   //open addProduct screen
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addProduct.fxml"));
             Parent mainParent = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -201,6 +201,7 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void deleteHandler(ActionEvent event) {
+//      ********   Set 2 - include confirm dialogue for all delete and cancel buttons   ********
         Alert confirmDelete = new Alert(AlertType.CONFIRMATION);
         confirmDelete.setTitle("Delete");
         confirmDelete.setHeaderText(null);
@@ -230,12 +231,12 @@ public class MainScreenController implements Initializable {
     }
 
     @FXML
-    private void resetTable(KeyEvent event) {
+    private void resetTable(KeyEvent event) {       //reset tables after a Name search
         if(event.getSource() == partSearchInput) partTableView.setItems(Inventory.getAllParts());
         else if(event.getSource() == productSearchInput) productTableView.setItems(Inventory.getAllProducts());
     }
     
-    private void selectionError(){
+    private void selectionError(){                  //modal display for modify selection error
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Selection Error");
         alert.setHeaderText("Make a selection");

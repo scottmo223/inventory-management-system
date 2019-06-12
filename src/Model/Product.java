@@ -36,7 +36,7 @@ public class Product {
         this.price = price;
     }
     public void setPrice(int price){
-        this.price = Double.valueOf(price); //converted int to double. WORKS???
+        this.price = Double.valueOf(price); //convert int to double.
     }
     public void setStock(int stock){
         this.stock = stock;
@@ -66,9 +66,9 @@ public class Product {
     public int getMax(){
         return this.max;
     }
-    // ************THE LIST************
+    
     public void addAssociatedPart(Part part){
-        associatedParts.add(part); //null pointer
+        associatedParts.add(part);
     }
     public void deleteAssociatedPart(Part part){
         associatedParts.remove(part);

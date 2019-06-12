@@ -75,6 +75,7 @@ public class ModifyPartController implements Initializable {
         String company = partCompanyIdField.getText();
         int machineId = inhouse.isSelected() ? Integer.parseInt(partMachineIdField.getText()) : 0;
         
+//      ********   Set 1 - prevent max field from having value below min field   ********        
         if (max <= min) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Input Error");
@@ -98,14 +99,14 @@ public class ModifyPartController implements Initializable {
     }
     
     @FXML
-    private void isOutsourced(ActionEvent event) {
+    private void isOutsourced(ActionEvent event) {      //toggle outsourced or inhouse part
         partCompanyIdLabel.setVisible(outsourced.isSelected());
         partCompanyIdField.setVisible(outsourced.isSelected());
         partMachineIdLabel.setVisible(!outsourced.isSelected());
         partMachineIdField.setVisible(!outsourced.isSelected());
     }
     
-    public void setPart(Part part) {
+    public void setPart(Part part) {                    //cast part to scene
         this.part = part;
         
         partID.setText(Integer.toString(part.getId()));
@@ -115,7 +116,7 @@ public class ModifyPartController implements Initializable {
         partMin.setText(Integer.toString(part.getMin()));
         partMax.setText(Integer.toString(part.getMax()));
         
-        if(part instanceof OutsourcedPart) {
+        if(part instanceof OutsourcedPart) {      //open as outsourced or inhouse part
             partCompanyIdField.setText(((OutsourcedPart) part).getCompanyName());
             outsourced.setSelected(true);
             partCompanyIdLabel.setVisible(outsourced.isSelected());

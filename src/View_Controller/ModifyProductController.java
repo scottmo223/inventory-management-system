@@ -75,7 +75,7 @@ public class ModifyProductController implements Initializable {
     @FXML
     private Button partSearch;
     private Product product;
-    private ObservableList<Part> addedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> addedParts = FXCollections.observableArrayList(); //holds product parts in table
     private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     /**
@@ -89,7 +89,7 @@ public class ModifyProductController implements Initializable {
         partInventoryAll.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameAll.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceAll.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partPriceAll.setCellFactory(tc -> new TableCell<Part, Double>() {
+        partPriceAll.setCellFactory(tc -> new TableCell<Part, Double>() {       //Format Currency
             @Override
             protected void updateItem(Double price, boolean empty) {
                 setText(empty ? null : currencyFormat.format(price));
@@ -102,7 +102,7 @@ public class ModifyProductController implements Initializable {
         partInventoryProduct.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameProduct.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceProduct.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partPriceProduct.setCellFactory(tc -> new TableCell<Part, Double>() {
+        partPriceProduct.setCellFactory(tc -> new TableCell<Part, Double>() {   //Format Currency
             @Override
             protected void updateItem(Double price, boolean empty) {
                 setText(empty ? null : currencyFormat.format(price));
@@ -113,11 +113,11 @@ public class ModifyProductController implements Initializable {
 
     @FXML
     private void searchHandler(ActionEvent event) {
-        try {
+        try {                                   //search by ID
                 int searchPartId = Integer.parseInt(searchInput.getText());
                 Part searchedPart = Model.Inventory.lookupPart(searchPartId);
                 partTableViewAll.getSelectionModel().select(searchedPart);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) { //search by Name
                 String searchPartName = searchInput.getText();
                 partTableViewAll.setItems(Model.Inventory.lookupPart(searchPartName));
             }
@@ -132,6 +132,7 @@ public class ModifyProductController implements Initializable {
         int max = Integer.parseInt(productMax.getText());
         int min = Integer.parseInt(productMin.getText());
         
+//      ********   Set 1 - prevent max field from having value below min field   ********        
         if (max <= min) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Input Error");
@@ -170,11 +171,11 @@ public class ModifyProductController implements Initializable {
     }
     
     @FXML
-    private void resetTable(KeyEvent event) {
+    private void resetTable(KeyEvent event) {       //reset table after a Name search
         partTableViewAll.setItems(Inventory.getAllParts());
     }
     
-    public void setProduct(Product product) {
+    public void setProduct(Product product) {       //cast part to scene
         this.product = product;
         
         productID.setText(Integer.toString(product.getId()));
@@ -184,7 +185,7 @@ public class ModifyProductController implements Initializable {
         productMin.setText(Integer.toString(product.getMin()));
         productMax.setText(Integer.toString(product.getMax()));
         
-        for (Part loadedPart : product.getAllAssociatedParts()) {
+        for (Part loadedPart : product.getAllAssociatedParts()) {   //load product parts to holder
             addedParts.add(loadedPart);
         }
     }

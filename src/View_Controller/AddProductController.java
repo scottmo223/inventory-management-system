@@ -74,7 +74,7 @@ public class AddProductController implements Initializable {
     private TextField partMin;
     @FXML
     private Button productSave;
-    private ObservableList<Part> addedParts = FXCollections.observableArrayList();
+    private ObservableList<Part> addedParts = FXCollections.observableArrayList(); //holds product parts in table
     private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     /**
@@ -88,7 +88,7 @@ public class AddProductController implements Initializable {
         partInventoryAll.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameAll.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceAll.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partPriceAll.setCellFactory(tc -> new TableCell<Part, Double>() {
+        partPriceAll.setCellFactory(tc -> new TableCell<Part, Double>() {       //Format Currency
             @Override
             protected void updateItem(Double price, boolean empty) {
                 setText(empty ? null : currencyFormat.format(price));
@@ -101,7 +101,7 @@ public class AddProductController implements Initializable {
         partInventoryProduct.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPartNameProduct.setCellValueFactory(new PropertyValueFactory<>("name"));
         partPriceProduct.setCellValueFactory(new PropertyValueFactory<>("price"));
-        partPriceProduct.setCellFactory(tc -> new TableCell<Part, Double>() {
+        partPriceProduct.setCellFactory(tc -> new TableCell<Part, Double>() {   //Format Currency
             @Override
             protected void updateItem(Double price, boolean empty) {
                 setText(empty ? null : currencyFormat.format(price));
@@ -112,11 +112,11 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void searchHandler(ActionEvent event) {
-        try {
+        try {                                   //search by ID
                 int searchPartId = Integer.parseInt(searchInput.getText());
                 Part searchedPart = Model.Inventory.lookupPart(searchPartId);
                 partTableViewAll.getSelectionModel().select(searchedPart);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException e) { //search by Name
                 String searchPartName = searchInput.getText();
                 partTableViewAll.setItems(Model.Inventory.lookupPart(searchPartName));
             }
@@ -143,7 +143,7 @@ public class AddProductController implements Initializable {
     @FXML
     private void saveHandler(ActionEvent event) {
         int id;
-        try {        //no duplicate part #'s and start at 1 if no parts
+        try {        //no duplicate part #'s and start at 1 if array is empty
             id = Model.Inventory.getAllProducts().get(Model.Inventory.getAllProducts().size()-1).getId() + 1;
         } catch (IndexOutOfBoundsException e) {
             id = 1;
@@ -154,6 +154,7 @@ public class AddProductController implements Initializable {
         int max = Integer.parseInt(partMax.getText());
         int min = Integer.parseInt(partMin.getText());
         
+//      ********   Set 1 - prevent max field from having value below min field   ********        
         if (max <= min) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Input Error");
@@ -174,7 +175,7 @@ public class AddProductController implements Initializable {
     }
     
     @FXML
-    private void resetTable(KeyEvent event) {
+    private void resetTable(KeyEvent event) {       //reset table after a Name search
         partTableViewAll.setItems(Inventory.getAllParts());
     }
 }

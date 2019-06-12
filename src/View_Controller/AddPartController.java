@@ -66,7 +66,7 @@ public class AddPartController implements Initializable {
     @FXML
     private void saveHandler(ActionEvent event) {
         int id;
-        try {        //no duplicate part #'s and start at 1 if no parts
+        try {        //no duplicate part #'s and start at 1 if array is empty
             id = Model.Inventory.getAllParts().get(Model.Inventory.getAllParts().size()-1).getId() + 1;
         } catch (IndexOutOfBoundsException e) {
             id = 1;
@@ -79,6 +79,7 @@ public class AddPartController implements Initializable {
         String company = partCompanyIdField.getText();
         int machineId = inhouse.isSelected() ? Integer.parseInt(partMachineIdField.getText()) : 0;
         
+//      ********   Set 1 - prevent max field from having value below min field   ********        
         if (max <= min) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Input Error");
@@ -100,7 +101,7 @@ public class AddPartController implements Initializable {
     }
     
     @FXML
-    private void isOutsourced(ActionEvent event) {
+    private void isOutsourced(ActionEvent event) {      //toggle outsourced or inhouse part
         partCompanyIdLabel.setVisible(outsourced.isSelected());
         partCompanyIdField.setVisible(outsourced.isSelected());
         partMachineIdLabel.setVisible(!outsourced.isSelected());

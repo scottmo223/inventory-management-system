@@ -27,7 +27,7 @@ public class Inventory {
                 return searchedPart;
             }            
         }
-        System.out.println("Not found");
+        System.out.println("Not found");    //for my sake
         return null;
     }
     
@@ -37,9 +37,6 @@ public class Inventory {
                 return searchedProduct;
             }            
         }
-        
-
-
         return null;
     }
     
