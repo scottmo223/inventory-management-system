@@ -151,7 +151,12 @@ public class MainScreenController implements Initializable {
             stage.show();
             ModifyPartController controller = fxmlLoader.getController();
             Part part = partTableView.getSelectionModel().getSelectedItem();
-            controller.setPart(part);
+            try{
+                controller.setPart(part);
+            } catch (NullPointerException e) {
+                stage.close();
+                selectionError();
+            }
         }
         else if(event.getSource() == productModify){
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifyProduct.fxml"));
@@ -163,8 +168,13 @@ public class MainScreenController implements Initializable {
             stage.show();
             ModifyProductController controller = fxmlLoader.getController();
             Product product = productTableView.getSelectionModel().getSelectedItem();
-            controller.setProduct(product);
-        }        
+            try{
+                controller.setProduct(product);
+            } catch (NullPointerException e) {
+                stage.close();
+                selectionError();
+            }
+        }
     }
 
     @FXML
@@ -223,5 +233,13 @@ public class MainScreenController implements Initializable {
     private void resetTable(KeyEvent event) {
         if(event.getSource() == partSearchInput) partTableView.setItems(Inventory.getAllParts());
         else if(event.getSource() == productSearchInput) productTableView.setItems(Inventory.getAllProducts());
+    }
+    
+    private void selectionError(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Selection Error");
+        alert.setHeaderText("Make a selection");
+        alert.setContentText(null);
+        alert.showAndWait();
     }
 }
