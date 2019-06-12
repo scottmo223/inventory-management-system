@@ -200,8 +200,8 @@ public class MainScreenController implements Initializable {
         ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
         confirmDelete.getButtonTypes().setAll(delete, cancel);
-
         Optional<ButtonType> result = confirmDelete.showAndWait();
+        
         if (result.get() == delete){
             if(event.getSource() == partDelete) {
                 Part part = partTableView.getSelectionModel().getSelectedItem();

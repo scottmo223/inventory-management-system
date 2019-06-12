@@ -17,6 +17,8 @@ import java.text.NumberFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -129,17 +131,24 @@ public class ModifyProductController implements Initializable {
         double price = Double.parseDouble(productCost.getText());
         int max = Integer.parseInt(productMax.getText());
         int min = Integer.parseInt(productMin.getText());
-                
-        Product updatedProduct = new Product(id, name, price, stock, min, max);
-        for (Part addedPart : addedParts) {
-            updatedProduct.addAssociatedPart(addedPart);
+        
+        if (max <= min) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Check Inventory Input");
+            alert.setContentText("Max value must be greater than Min");
+            alert.showAndWait();
+        } else {
+            Product updatedProduct = new Product(id, name, price, stock, min, max);
+            for (Part addedPart : addedParts) {
+                updatedProduct.addAssociatedPart(addedPart);
+            }
+            int productIndex = Model.Inventory.getAllProducts().indexOf(Model.Inventory.lookupProduct(id));
+            Model.Inventory.updateProduct(productIndex, updatedProduct);
+
+            Stage stage = (Stage) exit.getScene().getWindow();
+            stage.close();
         }
-        int productIndex = Model.Inventory.getAllProducts().indexOf(Model.Inventory.lookupProduct(id));
-        
-        Model.Inventory.updateProduct(productIndex, updatedProduct);
-        
-        Stage stage = (Stage) exit.getScene().getWindow();
-        stage.close();
     }
     
     @FXML

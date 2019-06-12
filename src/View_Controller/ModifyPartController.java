@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import Model.Part;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * FXML Controller class
@@ -73,13 +75,20 @@ public class ModifyPartController implements Initializable {
         String company = partCompanyIdField.getText();
         int machineId = inhouse.isSelected() ? Integer.parseInt(partMachineIdField.getText()) : 0;
         
-        Part updatedPart = inhouse.isSelected() ? new InhousePart(id, name, price, stock, min, max, machineId) : new OutsourcedPart(id, name, price, stock, min, max, company);
-        int partIndex = Model.Inventory.getAllParts().indexOf(Model.Inventory.lookupPart(id));
-        
-        Model.Inventory.updatePart(partIndex, updatedPart);
-        
-        Stage stage = (Stage) exit.getScene().getWindow();
-        stage.close();
+        if (max <= min) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Check Inventory Input");
+            alert.setContentText("Max value must be greater than Min");
+            alert.showAndWait();
+        } else {
+            Part updatedPart = inhouse.isSelected() ? new InhousePart(id, name, price, stock, min, max, machineId) : new OutsourcedPart(id, name, price, stock, min, max, company);
+            int partIndex = Model.Inventory.getAllParts().indexOf(Model.Inventory.lookupPart(id));
+            Model.Inventory.updatePart(partIndex, updatedPart);
+
+            Stage stage = (Stage) exit.getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML

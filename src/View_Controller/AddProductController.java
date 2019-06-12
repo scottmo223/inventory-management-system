@@ -17,6 +17,8 @@ import java.text.NumberFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -152,15 +154,23 @@ public class AddProductController implements Initializable {
         int max = Integer.parseInt(partMax.getText());
         int min = Integer.parseInt(partMin.getText());
         
-        Product newProduct = new Product(id, name, price, stock, min, max);
-        for (Part addedPart : addedParts) {
-            newProduct.addAssociatedPart(addedPart);
+        if (max <= min) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Check Inventory Input");
+            alert.setContentText("Max value must be greater than Min");
+            alert.showAndWait();
+        } else {
+            Product newProduct = new Product(id, name, price, stock, min, max);
+            for (Part addedPart : addedParts) {
+                newProduct.addAssociatedPart(addedPart);
+            }
+
+            Model.Inventory.addProduct(newProduct);
+
+            Stage stage = (Stage) exit.getScene().getWindow();
+            stage.close();
         }
-        
-        Model.Inventory.addProduct(newProduct);
-        
-        Stage stage = (Stage) exit.getScene().getWindow();
-        stage.close();
     }
     
     @FXML

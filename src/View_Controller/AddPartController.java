@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -21,8 +23,6 @@ import javafx.stage.Stage;
  */
 public class AddPartController implements Initializable {
 
-    @FXML
-    private Button saveButton;
     @FXML
     private Button exit;
     @FXML
@@ -51,6 +51,8 @@ public class AddPartController implements Initializable {
     private Label partCompanyIdLabel;
     @FXML
     private Label partMachineIdLabel;
+    @FXML
+    private Button saveButton;
 
 
     /**
@@ -77,10 +79,18 @@ public class AddPartController implements Initializable {
         String company = partCompanyIdField.getText();
         int machineId = inhouse.isSelected() ? Integer.parseInt(partMachineIdField.getText()) : 0;
         
-        Model.Inventory.addPart(inhouse.isSelected() ? new InhousePart(id, name, price, stock, min, max, machineId) : new OutsourcedPart(id, name, price, stock, min, max, company));
-        
-        Stage stage = (Stage) exit.getScene().getWindow();
-        stage.close();
+        if (max <= min) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Input Error");
+            alert.setHeaderText("Check Inventory Input");
+            alert.setContentText("Max value must be greater than Min");
+            alert.showAndWait();
+        } else {
+            Model.Inventory.addPart(inhouse.isSelected() ? new InhousePart(id, name, price, stock, min, max, machineId) : new OutsourcedPart(id, name, price, stock, min, max, company));
+
+            Stage stage = (Stage) exit.getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML
